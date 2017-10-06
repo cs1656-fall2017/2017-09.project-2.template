@@ -18,7 +18,7 @@ The goal of this assignment is to familiarize you with simple recommender system
 ### What to do -- pittrecsys.py
 You are asked to write a Python program, called `pittrecsys.py` that will:
 1. provide movie recommendations (i.e., predict ratings for a specific user-movie combination, given other ratings) and   
-1. evaluate the perforamnce of different recommendation algorithms using a combination of training and test data.
+1. evaluate the performance of different recommendation algorithms using a combination of training and test data.
 
 
 You program should be invoked as:
