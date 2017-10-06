@@ -12,11 +12,13 @@
 This is the **second assignment** for the CS 1656 -- Introduction to Data Science (CS 2056) class, for the Fall 2017 semester.
 
 ### Goal
-The goal of this assignment is to familiarize you with simple recommender systems (collaborative filtering algorithms).
+The goal of this assignment is to familiarize you with simple recommender systems (i.e., collaborative filtering algorithms).
 
 
 ### What to do -- pittrecsys.py
-You are asked to write a Python program, called `pittrecsys.py` that will provide movie recommendations (i.e., predict ratings for a specific user-movie combination, given other ratings).
+You are asked to write a Python program, called `pittrecsys.py` that will:
+1. provide movie recommendations (i.e., predict ratings for a specific user-movie combination, given other ratings) and   
+1. evaluate the perforamnce of different recommendation algorithms using a combination of training and test data.
 
 
 You program should be invoked as:
@@ -26,19 +28,19 @@ python3 pittrecsys.py command optional_arguments
 There are two possible options for _command_ and multiple options for _optional_arguments_; these are specified next.
 
 ### (1) pittrecsys.py predict TrainingFile K Algorithm UserID MovieID  
-This command will use simple user-based collaborative filtering, with the following parameters: 
-* **TrainingFile** is the training data file  
-* **K** means the algorithm should consider only the K nearest (most similar) users to user **UserID**. Note that a value of 0 means that there is no limit and all the users should be considered.  
-* **UserID** is the user we want to predict the rating for **MovieID**   
+This command will use simple user-based collaborative filtering to predict the rating of user userID for movie movieID, with the following parameters: 
+* **TrainingFile** is the training data file (see next section for more information on DataSets)  
+* **K** means that the algorithm should consider only the K nearest (most similar) users to user **UserID**. Note that a value of K=0 means that there is no limit and all the users should be considered.  
+* **UserID** is the user for whom we want to predict their rating for **MovieID**   
 * **Algorithm** is the specific algorithm used, which can be one of the following:  
-	* **average**, just computing the average rating for MovieID based on all other movies (K is effectively set to 0 for this, regardless of user input)  
+	* **average**, just computing the average rating for MovieID based on all other ratings for that movie (K is effectively set to 0 for this, regardless of user input)  
 	* **euclid**, when using Euclidean distance to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights)  
-	* **pearson**, when using Person Similarity to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights). You should use the Pearson function provided in scipy.stats module  https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html  
+	* **pearson**, when using Pearson Similarity to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights). You should use the Pearson function provided in thr `scipy.stats` module:  https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html  
 	* **cosine**, when using Cosine Similarity to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights). 
 
 For example:  
-`python3 pittrecsys predict train.data 20 euclid 101 62` 
-should use train.data and predict the rating for user 101 for movie 62 using the euclidean distance metric for user-user similarity and only considering the 20 most similar users to user 101.
+`python3 pittrecsys.py predict train.data 20 euclid 101 62` 
+should use train.data and predict the rating of user 101 for movie 62 using the euclidean distance metric for user-user similarity, while only considering the 20 most similar users to user 101.
 
 The output format of your program should be as follows:
 ```
@@ -53,23 +55,23 @@ pittrecsys.prediction = 3.34
 
 Please note that the predicted rating shown above is just for formatting purposes only and that you should show all available decimal points.
 
-Also, you should show an error message in case the userID or movieID are invalid, the training data file is not readable, the provided algorithm does not match one of the four specified, etc.
+Also, you should show an error message in case the userID or movieID are invalid, the training data file is not readable, the provided algorithm does not match one of the four specified, and K is not a positive integer.
 
 
 ### (2) pittrecsys.py evaluate TrainingFile K Algorithm TestingFile  
-This command will use simple user-based collaborative filtering, with the following parameters: 
+This command will use simple user-based collaborative filtering to evaluate the performance of the specified algorithm, with the following parameters: 
 * **TrainingFile** is the training data file  
-* **K** means the algorithm should consider only the K nearest (most similar) users to user **UserID**. Note that a value of 0 means that there is no limit and all the users should be considered.    
+* **K** means that the algorithm should consider only the K nearest (most similar) users to user **UserID**. Note that a value of K=0 means that there is no limit and all the users should be considered.    
 * **TestingFile** is the testing data file    
 * **Algorithm** is the specific algorithm used, which can be one of the following:  
-	* **average**, just computing the average rating for MovieID based on all other movies (K is effectively set to 0 for this, regardless of user input)  
+	* **average**, just computing the average rating for MovieID based on all other ratings for that movie (K is effectively set to 0 for this, regardless of user input)  
 	* **euclid**, when using Euclidean distance to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights)  
-	* **pearson**, when using Person Similarity to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights). You should use the Pearson function provided in scipy.stats module  https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html  
+	* **pearson**, when using Pearson Similarity to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights). You should use the Pearson function provided in the `scipy.stats` module:   https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html  
 	* **cosine**, when using Cosine Similarity to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights).   
 
 For example:  
-`python3 pittrecsys evaluate train.data 20 pearson test.data` 
-should use train.data for training the user-user collaborative filtering algorithm, and then try to predict the test.data UserID/MovieID pairs and compare them to those in the test.data file. Your program should aggregate these differences by computing the Root Mean Squared Error (RMSE) and report that number.
+`python3 pittrecsys.py evaluate train.data 20 pearson test.data` 
+should use train.data for training the user-user collaborative filtering algorithm, and then try to predict the test.data UserID/MovieID pairs and compare the predictions to the corresponding ratings in the test.data file. Your program should aggregate these differences by computing the Root Mean Squared Error (RMSE) and reporting that number.
 
 The output format of your program should be as follows:
 ```
@@ -83,7 +85,10 @@ pittrecsys.RMSE       = 1234.1234
 
 Please note that the RMSE shown above is just for formatting purposes only and that you should show all available decimal points.
 
-Also, you should show an error message in cas the training or testing data file is not readable, the provided algorithm does not match one of the four specified, etc.
+Also, you should show an error message in cas the training or testing data file is not readable, the provided algorithm does not match one of the four specified, and K is not a positive integer.
+
+### Datasets
+We will use the [MovieLens Data](https://grouplens.org/datasets/movielens/) and in particular we will use the 100K dataset which we make available locally, as part of this repository. This has 100,000 movie ratings (1-5) from 943 users on 1,682 movies. We will test your programs using a variant of these datasets. You are encouraged to use smaller datasets for testing, especially in the beginning.
 
 
 ### Important notes about grading
