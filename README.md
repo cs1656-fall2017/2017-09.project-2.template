@@ -27,13 +27,13 @@ There are two possible options for _command_ and multiple options for _optional_
 
 ### (1) pittrecsys.py predict TrainingFile K Algorithm UserID MovieID  
 This command will use simple user-based collaborative filtering, with the following parameters: 
-* **TrainingFile** is the training data file
+* **TrainingFile** is the training data file  
 * **K** means the algorithm should consider only the K nearest (most similar) users to user **UserID**. Note that a value of 0 means that there is no limit and all the users should be considered.  
 * **UserID** is the user we want to predict the rating for **MovieID**   
-* **Algorithm** is the specific algorithm used, which can be one of the following:
-** **average**, just computing the average rating for MovieID based on all other movies (K is effectively set to 0 for this, regardless of user input)
-** **euclid**, when using Euclidean distance to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights)
-** **pearson**, when using Person Similarity to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights). You should use the Pearson function provided in scipy.stats module https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html
+* **Algorithm** is the specific algorithm used, which can be one of the following:  
+** **average**, just computing the average rating for MovieID based on all other movies (K is effectively set to 0 for this, regardless of user input)  
+** **euclid**, when using Euclidean distance to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights)  
+** **pearson**, when using Person Similarity to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights). You should use the Pearson function provided in scipy.stats module  https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html  
 ** **cosine**, when using Cosine Similarity to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights). 
 
 For example:  
@@ -58,14 +58,14 @@ Also, you should show an error message in case the userID or movieID are invalid
 
 ### (2) pittrecsys.py evaluate TrainingFile K Algorithm TestingFile  
 This command will use simple user-based collaborative filtering, with the following parameters: 
-* **TrainingFile** is the training data file 
-* **K** means the algorithm should consider only the K nearest (most similar) users to user **UserID**. Note that a value of 0 means that there is no limit and all the users should be considered.  
-* **TestingFile** is the testing data file  
-* **Algorithm** is the specific algorithm used, which can be one of the following:
-** **average**, just computing the average rating for MovieID based on all other movies (K is effectively set to 0 for this, regardless of user input)
-** **euclid**, when using Euclidean distance to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights)
-** **pearson**, when using Person Similarity to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights). You should use the Pearson function provided in scipy.stats module https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html
-** **cosine**, when using Cosine Similarity to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights). 
+* **TrainingFile** is the training data file  
+* **K** means the algorithm should consider only the K nearest (most similar) users to user **UserID**. Note that a value of 0 means that there is no limit and all the users should be considered.    
+* **TestingFile** is the testing data file    
+* **Algorithm** is the specific algorithm used, which can be one of the following:  
+** **average**, just computing the average rating for MovieID based on all other movies (K is effectively set to 0 for this, regardless of user input)  
+** **euclid**, when using Euclidean distance to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights)  
+** **pearson**, when using Person Similarity to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights). You should use the Pearson function provided in scipy.stats module  https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html  
+** **cosine**, when using Cosine Similarity to measure user-user similarity and then use the nearest K users to UserID to predict his/her rating for MovieID (through a simple weighted average, where the similarities are the weights).   
 
 For example:  
 `python3 pittrecsys evaluate train.data 20 pearson test.data` 
