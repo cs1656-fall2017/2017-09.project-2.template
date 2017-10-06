@@ -49,7 +49,7 @@ pittrecsys.k          = 20
 pittrecsys.userID     = 101
 pittrecsys.movieID    = 62
 pittrecsys.prediction = 3.34
-'''
+```
 
 Please note that the predicted rating shown above is just for formatting purposes only and that you should show all available decimal points.
 
@@ -79,7 +79,7 @@ pittrecsys.testing    = test.data
 pittrecsys.algorithm  = pearson
 pittrecsys.k          = 20
 pittrecsys.RMSE       = 1234.1234
-'''
+```
 
 Please note that the RMSE shown above is just for formatting purposes only and that you should show all available decimal points.
 
